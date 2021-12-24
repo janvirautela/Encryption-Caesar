@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content = "IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Our codes</title>
+    </head>
+    <body>
+        <header>
+        <h1><i>Welcome!</i></h1>
+        </header>
+        Get ready to <b>encrypt</b> or <b>decrypt</b>
+        <section>
+            <article>
+            <br> 
+            <hr>
+                <form name ="codes">
+                    Enter what you want to turn into secret code:
+                    <input type="text" name="code">
+                    Enter k value: 
+                    <input type="text" name="val">
+                    <input type="button" value="Encrypt" style="background-color:#000;
+                    color:#FFF; font-size: 18px; font-family: monospace;" onClick="Encrypt()">
+                    <br>
+                    Your secret code is: 
+                    <input type="text" name="sletters">
+                </form>
+                <script type ="text/javascript">
+                    function Encrypt(str,k){
+                    var finalStr= '';
+                    var lowerCaseStr = str.toLowerCase();
+                    var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+
+                    for(var i=0;i<lowerCaseStr.length; i++){
+                        var curr = lowerCaseStr[i];
+                        if(curr == ' '){
+                            finalStr += curr;
+                            continue;
+                        }
+                        var index = alphabet.indexOf(curr);
+                        var indexNew = index + k;
+                        if (indexNew > 25) indexNew = indexNew - 26;
+                        if(indexNew < 0) indexNew = indexNew + 26;
+                        if(str[i]== str[i].toUpperCase()){
+                            finalStr += alphabet[indexNew].toUpperCase();
+                        }
+                        else finalStr += alphabet[indexNew];
+                    }
+                    return finalStr;
+                    }
+                    document.codes.code.value = 'ab'; //substitute this with what you want to code, ex 'ab'
+                    document.codes.val.value = 2; //input k value here, how much you want to the alphabets to skip by, ex 2
+                    document.codes.sletters.value=Encrypt('ab',2); //if you did Encrypt(secret,val) then expect 'cd'
+                </script>
+            </article>
+        </section>
+    </body>
+</html>
